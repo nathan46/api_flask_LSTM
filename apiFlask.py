@@ -1,14 +1,14 @@
 
 import numpy as np
 from nltk.corpus import stopwords
-import spacy
+#import spacy
 from flask import Flask, jsonify, request
 import codecs
 import json
 import torch.nn as nn
 import torch
 app = Flask(__name__)
-nlp = spacy.load('fr_core_news_md')
+#nlp = spacy.load('fr_core_news_md')
 
 seq_length=30
 
@@ -147,12 +147,13 @@ def preprocess(tweet, vocab_to_int):
 
     tweet = text_final
 
+'''
     #lemmatisation
     doc = nlp(tweet)
     text_final = ""
     for token in doc:
         text_final = text_final+" "+token.lemma_
-
+'''
     tweet = text_final.strip()
 
     word_list = tweet.split()
