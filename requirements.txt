@@ -1,4 +1,6 @@
 Flask==0.12.2
 numpy==1.17.4
+spacy==2.2.3
+https://github.com/explosion/spacy-models/releases/download/fr_core_news_md-2.2.5/fr_core_news_md-2.2.5.tar.gz
 nltk==3.4.5
 https://download.pytorch.org/whl/cpu/torch-1.4.0%2Bcpu-cp36-cp36m-linux_x86_64.whl
