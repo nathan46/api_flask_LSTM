@@ -8,7 +8,7 @@ import json
 import torch.nn as nn
 import torch
 app = Flask(__name__)
-nlp = spacy.load('fr_core_news_md')
+#nlp = spacy.load('fr_core_news_md')
 
 seq_length=30
 
@@ -145,9 +145,9 @@ def preprocess(tweet, vocab_to_int):
         if word not in stopwords.words('french'):
             text_final = text_final+" "+word
 
-    tweet = text_final
+    tweet = text_final.strip()
 
-
+    '''
     #lemmatisation
     doc = nlp(tweet)
     text_final = ""
@@ -155,6 +155,7 @@ def preprocess(tweet, vocab_to_int):
         text_final = text_final+" "+token.lemma_
 
     tweet = text_final.strip()
+    '''
 
     word_list = tweet.split()
     num_list = []
