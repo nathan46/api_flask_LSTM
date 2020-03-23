@@ -8,7 +8,7 @@ import json
 import torch.nn as nn
 import torch
 app = Flask(__name__)
-#nlp = spacy.load('fr_core_news_md')
+nlp = spacy.load('fr_core_news_md')
 
 seq_length=30
 
@@ -147,7 +147,7 @@ def preprocess(tweet, vocab_to_int):
 
     tweet = text_final.strip()
 
-    '''
+
     #lemmatisation
     doc = nlp(tweet)
     text_final = ""
@@ -155,7 +155,6 @@ def preprocess(tweet, vocab_to_int):
         text_final = text_final+" "+token.lemma_
 
     tweet = text_final.strip()
-    '''
 
     word_list = tweet.split()
     num_list = []
@@ -216,5 +215,4 @@ def index():
         return jsonify({"about": "Hello World!"})
 
 if __name__ == '__main__':
-    port = int(os.environ.get("PORT", 5000))
-    app.run(debug=True, host='0.0.0.0', port=port)
+    app.run(debug=True)

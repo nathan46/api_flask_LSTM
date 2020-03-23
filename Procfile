@@ -1,1 +1,1 @@
-web: python apiFlask.py $PORT
+web:python apiFlask.py
