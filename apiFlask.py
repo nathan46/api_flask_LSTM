@@ -17,7 +17,7 @@ seq_length=30
 
 punctuation = "!\"#$%&'()*+-./:;<=>?@[\]^_`{|}~,"
 
-with open('vocab_to_int.json') as f:
+with open('vocab_to_int-30k_3b.json') as f:
     vocab_to_int = json.load(f)
 
 train_on_gpu= False#torch.cuda.is_available()
@@ -127,7 +127,7 @@ def loadModel(name):
 
     return model
 
-net = loadModel('model2')
+net = loadModel('model_30k_3b')
 
 def preprocess(tweet, vocab_to_int):
     tweet = tweet.lower()
@@ -137,6 +137,9 @@ def preprocess(tweet, vocab_to_int):
 
     #enlever les liens
     indice = tweet.find("http")
+    if indice == -1 :
+        indice = tweet.find("pic.twitter")
+
     if indice != -1:
         tweet = tweet[:indice]
 
@@ -150,7 +153,7 @@ def preprocess(tweet, vocab_to_int):
 
     tweet = text_final.strip()
 
-    	
+
     #lemmatisation
     doc = nlp(tweet)
     text_final = ""
