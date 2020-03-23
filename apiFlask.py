@@ -1,5 +1,7 @@
 
 import numpy as np
+import nltk
+nltk.download('stopwords')
 from nltk.corpus import stopwords
 import spacy
 from flask import Flask, jsonify, request
@@ -8,7 +10,8 @@ import json
 import torch.nn as nn
 import torch
 app = Flask(__name__)
-nlp = spacy.load('fr_core_news_md')
+import fr_core_news_sm
+nlp = fr_core_news_sm.load()
 
 seq_length=30
 
@@ -147,7 +150,7 @@ def preprocess(tweet, vocab_to_int):
 
     tweet = text_final.strip()
 
-
+    	
     #lemmatisation
     doc = nlp(tweet)
     text_final = ""
@@ -155,7 +158,7 @@ def preprocess(tweet, vocab_to_int):
         text_final = text_final+" "+token.lemma_
 
     tweet = text_final.strip()
-
+    print(tweet)
     word_list = tweet.split()
     num_list = []
     #list of reviews
@@ -210,9 +213,10 @@ def index():
         some_json = request.get_json()
         tweet = some_json['tweet']
         pred = str(predict(net, tweet, seq_length))
-        return jsonify({'score': pred}), 201
+        return "{'score':"+pred+"}", 201, {'Content-Type':'application/json'}
+        #return jsonify({'score': pred}), 201
     else:
         return jsonify({"about": "Hello World!"})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=80)
