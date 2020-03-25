@@ -13,11 +13,12 @@ app = Flask(__name__)
 import fr_core_news_sm
 nlp = fr_core_news_sm.load()
 
-seq_length=30
+seq_length=25
+nom_fichier = '30k_1c_100b_4e'
 
 punctuation = "!\"#$%&'()*+-./:;<=>?@[\]^_`{|}~,"
 
-with open('vocab_to_int-30k_3b.json') as f:
+with open('vocab_to_int/vocab_to_int-'+nom_fichier+'.json') as f:
     vocab_to_int = json.load(f)
 
 train_on_gpu= False#torch.cuda.is_available()
@@ -119,7 +120,7 @@ def loadModel(name):
     n_layers = 2
 
     model = SentimentLSTM(vocab_size, output_size, embedding_dim, hidden_dim, n_layers)
-    model.load_state_dict(torch.load(name+'.pth', map_location='cpu'))
+    model.load_state_dict(torch.load('model/'+name+'.pth', map_location='cpu'))
     model.eval()
 
     if(train_on_gpu):
@@ -127,7 +128,7 @@ def loadModel(name):
 
     return model
 
-net = loadModel('model_30k_3b')
+net = loadModel('model_'+nom_fichier)
 
 def preprocess(tweet, vocab_to_int):
     tweet = tweet.lower()
@@ -173,7 +174,7 @@ def preprocess(tweet, vocab_to_int):
     tweets_int.append(num_list)
     return tweets_int
 
-def predict(net, test_tweet, sequence_length=30):
+def predict(net, test_tweet, sequence_length=25):
     ''' Prints out whether a give review is predicted to be
         positive or negative in sentiment, using a trained model.
 
