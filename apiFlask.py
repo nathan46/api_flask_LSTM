@@ -120,7 +120,7 @@ def loadModel(name):
     n_layers = 2
 
     model = SentimentLSTM(vocab_size, output_size, embedding_dim, hidden_dim, n_layers)
-    model.load_state_dict(torch.load('model/'+name+'.pth', map_location='cpu'))
+    model.load_state_dict(torch.load(name+'.pth', map_location='cpu'))
     model.eval()
 
     if(train_on_gpu):
@@ -128,7 +128,7 @@ def loadModel(name):
 
     return model
 
-net = loadModel('model_'+nom_fichier)
+net = loadModel('model/model_'+nom_fichier)
 
 def preprocess(tweet, vocab_to_int):
     tweet = tweet.lower()
