@@ -76,7 +76,7 @@ Il suffit de changer la variable **nom_fichier** avec le nom que vous avez donn�
 nom_fichier = 'unNomAuHasard'
 ```
 
-Lors de la création du modèle (notebook), si vous avez change des variables qui font varier l'architecture du modèle, par exemple **n_layers**, **hidden_dim** etc.
+Lors de la création du modèle (notebook), si vous avez changé des variables qui font varier l'architecture du modèle, par exemple **n_layers**, **hidden_dim** etc.
 Il ne faudra pas oublier de les reporter aussi dans le code de l'API.
 
 
