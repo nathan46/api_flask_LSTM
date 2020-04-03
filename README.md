@@ -48,7 +48,7 @@ Vous pouvez seulement faire des requêtes POST avec les données en JSON structu
 Vous ne pouvez analyser qu'un seul tweet par requête.
 Vous recevrez une réponse en JSON structurée comme cela :
 ```json
-{'score':0.7452720999717712}
+{"score":0.7452720999717712}
 ```
 Exemple de requête :
 ```bash
@@ -56,7 +56,7 @@ $ curl localhost -d '{"tweet": "Merci beaucoup pour votre soutient vous etes tre
 ```
 Réponse :
 ```json
-{'score':0.07911539822816849}
+{"score":0.07911539822816849}
 ```
 
 Plus le score est proche de 0 plus il est considéré comme gentil/neutre alors qu’au contraire un tweet classifié proche de 1 est considéré comme méchant/menaçant/vulgaire
