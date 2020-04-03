@@ -10,11 +10,10 @@ import json
 import torch.nn as nn
 import torch
 app = Flask(__name__)
-import fr_core_news_sm
-nlp = fr_core_news_sm.load()
+nlp = spacy.load('fr_core_news_md')
 
-seq_length=25
-nom_fichier = '30k_1c_100b_4e'
+seq_length=15
+nom_fichier = '70k_3c_50b_5e_len15'
 
 punctuation = "!\"#$%&'()*+-./:;<=>?@[\]^_`{|}~,"
 
@@ -117,7 +116,7 @@ def loadModel(name):
     output_size = 1
     embedding_dim = 200
     hidden_dim = 256
-    n_layers = 2
+    n_layers = 3
 
     model = SentimentLSTM(vocab_size, output_size, embedding_dim, hidden_dim, n_layers)
     model.load_state_dict(torch.load(name+'.pth', map_location='cpu'))
@@ -218,9 +217,8 @@ def index():
         tweet = some_json['tweet']
         pred = str(predict(net, tweet, seq_length))
         return "{'score':"+pred+"}", 201, {'Content-Type':'application/json'}
-        #return jsonify({'score': pred}), 201
     else:
-        return jsonify({"about": "Hello World!"})
+        return "{'score':'use post request'}", 201, {'Content-Type':'application/json'}
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=80)
